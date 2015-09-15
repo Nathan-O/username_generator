@@ -1,5 +1,6 @@
 # Make sure to run the tests in your /spec folder
 # Run `rspec /spec/username_spec.rb` to get started.
+$usernames = []
 
 def format_name(first, last)
   	if (first === "")
@@ -26,11 +27,10 @@ def format_year(year)
 	end
 end
 
-def build_username(first, last, *nums)
+def build_username(first, last, year)
   name = format_name(first, last)
-  annual = format_year(nums[0])
-  level = check_privilege(nums[1])
-  username = level + name + annual
+  annual = format_year(year)
+  username = name + annual
   
 end
 
@@ -45,3 +45,37 @@ def check_privilege(level=0)
 		return ''
 	end
 end
+
+def generate_username (first, last, year, level=0)
+	level = check_privilege(level)
+	name = build_username(first, last, year)
+	username = level + name
+	number = 0
+
+	$usernames.each {|name| if (name === username) 
+		username = username + "_" + (number += 1) 
+		$usernames = $usernames.push(username)
+	else 
+		$usernames = $usernames.push(username)
+	end}
+	return $usernames
+end
+	
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
