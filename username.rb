@@ -29,9 +29,19 @@ end
 def build_username(first, last, *nums)
   name = format_name(first, last)
   annual = format_year(nums[0])
-  username = name + annual
+  level = check_privilege(nums[1])
+  username = level + name + annual
   
 end
 
-
-# /\W/
+def check_privilege(level=0)
+	if level === 1
+		return 'seller-'
+	elsif level === 2
+		return "manager-"
+	elsif level === 3
+		return 'admin-'
+	else
+		return ''
+	end
+end
